@@ -213,7 +213,14 @@ guesswork. We can't know for sure when executing whether two keys were
 typed quickly or slowly when recorded.)")
 
 ;; Internal vars
-(defvar key-chord-mode nil)
+(defvar key-chord-mode nil
+  "Mode variable for key-chord minor mode" ) 
+;; (make-variable-buffer-local 'key-chord-mode) ;; Not sure if it's needed/good?
+;; Add key-chord-mode to minor-mode-alist
+(if (not (assq 'key-chord-mode minor-mode-alist))
+      (setq minor-mode-alist
+      (cons '(key-chord-mode " KeyC ") ;; Use KeyC to show on mode-line
+      minor-mode-alist)))
 
 ;; Shortcut for key-chord-input-method: no need to test a key again if it
 ;; didn't matched a chord the last time. Improves feedback during autorepeat.
